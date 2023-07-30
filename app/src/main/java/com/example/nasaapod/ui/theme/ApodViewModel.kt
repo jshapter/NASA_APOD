@@ -5,13 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.nasaapod.data.Apod
 import com.example.nasaapod.network.ApodApi
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
 sealed class ApodUiState {
-    data class Success(val msg: String) : ApodUiState()
+    data class Success(val apod: Apod) : ApodUiState()
     object Error : ApodUiState()
     object Loading : ApodUiState()
 }
@@ -30,7 +31,7 @@ class ApodViewModel : ViewModel() {
             apodUiState = try {
                 val apodResult = ApodApi.retrofitService.getApod()
                 ApodUiState.Success(
-                    "success ${apodResult.title}"
+                    apodResult
                 )
             } catch (e: IOException) {
                 ApodUiState.Error
