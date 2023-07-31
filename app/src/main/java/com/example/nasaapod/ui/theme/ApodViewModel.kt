@@ -10,8 +10,6 @@ import com.example.nasaapod.network.ApodApi
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 sealed class ApodUiState {
     data class Success(val apod: Apod) : ApodUiState()
