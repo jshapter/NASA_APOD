@@ -7,6 +7,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private val retrofitApi = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
@@ -14,8 +15,8 @@ private val retrofitApi = Retrofit.Builder()
     .build()
 
 interface ApodApiService {
-    @GET("/planetary/apod?api_key=vUFLHpbyfg1kmhcblxfulV8X4QEXvb3ghuFqwPfS")
-    suspend fun getApod(): Apod
+    @GET("/planetary/apod")
+    suspend fun getApod(@Query("api_key") key: String): Apod
 }
 
 object ApodApi {
