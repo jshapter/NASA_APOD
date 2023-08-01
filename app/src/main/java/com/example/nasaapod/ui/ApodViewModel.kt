@@ -50,6 +50,7 @@ class ApodViewModel : ViewModel() {
                 val dateFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
                 val date = toDate.format(dateFormatter)
 
+                // Incorrect warning for condition always being false. It can be.
                 if (apodResult.copyright == null) {
                     copyright = "null"
                 }

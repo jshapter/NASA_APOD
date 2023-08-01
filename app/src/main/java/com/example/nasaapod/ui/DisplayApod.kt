@@ -81,11 +81,13 @@ fun DisplayApod(
                                     fontSize = 22.sp,
                                     fontWeight = FontWeight.Bold,
                                     maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
+                                    overflow = TextOverflow.Ellipsis,
                                 )
                                 IconButton(
-                                    onClick = { /*TODO*/ })
-                                {
+                                    onClick = { /*TODO*/ },
+                                    modifier = Modifier
+                                        .size(28.dp)
+                                ) {
                                     Icon(
                                         Icons.Default.Download,
                                         contentDescription = "download"
@@ -94,8 +96,10 @@ fun DisplayApod(
                             }
                             Text(
                                 text = date,
-                                fontSize = 14.sp,
-                                modifier = Modifier.alpha(0.8f)
+                                fontSize = 12.sp,
+                                modifier = Modifier
+                                    .alpha(0.8f)
+                                    .padding(bottom = 4.dp)
                             )
                         }
                     }
@@ -145,10 +149,11 @@ fun DisplayApod(
                             )
                             Text(
                                 modifier = Modifier
-                                    .padding(top = 8.dp, bottom = 16.dp)
+                                    .padding(top = 6.dp, bottom = 16.dp)
                                     .alpha(0.8f),
                                 text = description,
-                                letterSpacing = 0.1.sp
+                                fontSize = 14.sp,
+                                lineHeight = 18.sp
                             )
                         }
                     }
