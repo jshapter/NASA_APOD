@@ -1,6 +1,6 @@
 package com.example.nasaapod.ui
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,15 +25,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.example.nasaapod.ui.theme.Nasalization
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -108,17 +108,32 @@ fun DisplayApod(
 
                     item {
                         Column {
-                            Box (
-                                modifier = Modifier
-                                    .clipToBounds()
-                            ) {
-                                AsyncImage(
-                                    modifier = Modifier
-                                        .align(Alignment.Center)
-                                        .border(4.dp, MaterialTheme.colorScheme.onBackground),
-                                    model = url,
-                                    contentDescription = "astronomy photograph of the day"
+                            Box {
+                                val painter = rememberAsyncImagePainter(
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(url)
+                                        .size(coil.size.Size.ORIGINAL)
+                                        .crossfade(true)
+                                        .build()
                                 )
+                                val state = painter.state
+
+                                if (state is AsyncImagePainter.State.Loading) {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth(),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(64.dp)
+                                        )
+                                    }
+                                } else {
+                                    Image(
+                                        painter = painter,
+                                        contentDescription = "astronomy photo of the day"
+                                    )
+                                }
                             }
                             if (copyright != "null") {
                                 Row(
