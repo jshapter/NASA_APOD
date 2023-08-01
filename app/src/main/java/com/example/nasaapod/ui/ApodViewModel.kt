@@ -1,5 +1,8 @@
 package com.example.nasaapod.ui
 
+import android.content.ContentValues.TAG
+import android.nfc.Tag
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -53,6 +56,13 @@ class ApodViewModel : ViewModel() {
                 // Incorrect warning for condition always being false. It can be.
                 if (apodResult.copyright == null) {
                     copyright = "null"
+                } else if (copyright.lines().size > 1 ) {
+                    copyright = copyright.replace("\n", " ")
+                    val firstChar = copyright[0].toString()
+                    if (firstChar == " ") {
+                        val length = copyright.length
+                        copyright = copyright.substring(1,length)
+                    }
                 }
 
                 ApodUiState.Success(
