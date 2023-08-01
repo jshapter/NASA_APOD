@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.nasaapod.ui.ApodUiState
 import com.example.nasaapod.ui.ApodViewModel
 import com.example.nasaapod.ui.DisplayApod
+import com.example.nasaapod.ui.Loading
 
 @Composable
 fun ApodApp() {
@@ -14,7 +15,7 @@ fun ApodApp() {
 
     when (val apodUiState = apodViewModel.apodUiState) {
 
-        is ApodUiState.Loading -> Text(text = "Loading")
+        is ApodUiState.Loading -> Loading()
 
         is ApodUiState.Error -> Text(text = "Error")
 

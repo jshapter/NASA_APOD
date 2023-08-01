@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Copyright
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -31,6 +32,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.example.nasaapod.ui.theme.Nasalization
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +45,6 @@ fun DisplayApod(
     copyright: String,
     description: String
 ) {
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
